@@ -20,6 +20,7 @@ $router->post('foo', function () {
     //
 });
 $router->get('user/{id}', 'UserController@show');
+
 $router->get('home', function () {
     return response($content, $status)
                   ->header('Content-Type', $value);
