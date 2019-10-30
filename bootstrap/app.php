@@ -80,6 +80,12 @@ $app->singleton(
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+
+if (env('APP_DEBUG')) {
+    $app->configure('app');
+    $app->configure('debugbar');
+    $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
+}
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
