@@ -10,21 +10,32 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+
+Route::get('/', function () {
+    return view('main');
 });
+
+//Route::get('/', 'DomainsController@store');
+
 $router->get('foo', function () {
     return 'Hello World';
 });
+
 $router->post('foo', function () {
     //
 });
-//$router->get('user/{id}', 'UserController@show');
+
+$router->get('user/{id}', 'UserController@show');
 
 $router->get('home', function () {
     return response($content, $status)
                   ->header('Content-Type', $value);
 });
+
 Route::get('navbar', function () {
-    return view('navbar', ['name' => 'James']);
+    return view('navbar', ['name' => 'Zhopa']);
 });
+
+$router->post('domains', 'DomainsController@store');
+
+$router->get('domains/{id}', 'DomainsTableController@index');
