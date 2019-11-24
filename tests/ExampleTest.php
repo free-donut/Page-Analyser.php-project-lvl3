@@ -2,6 +2,7 @@
 
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
+use Illuminate\Http\Response;
 
 class ExampleTest extends TestCase
 {
@@ -10,12 +11,10 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testApplication()
     {
-        $this->get('/');
+        $response = $this->call('GET', '/');
 
-        $this->assertEquals(
-            $this->app->version(), $this->response->getContent()
-        );
+        $this->assertEquals(200, $response->status());
     }
 }
