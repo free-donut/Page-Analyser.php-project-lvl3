@@ -3,7 +3,7 @@ test:
 install:
 	composer install
 lint:
-	composer run-script phpcs -- --standard=PSR12 routes
+	composer run-script phpcs -- --standard=PSR12 routes app/Http/Controllers
 run:
 	php -S localhost:8000 -t public
 logs:

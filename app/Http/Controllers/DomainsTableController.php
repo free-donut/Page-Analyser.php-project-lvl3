@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
-
-
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -22,13 +20,10 @@ class DomainsTableController extends Controller
         $domain = DB::table('Domains')->where('id', $id)->first();
         $count = DB::table('Domains')->count();
 
-        //return $count;
         $name = $domain->name;
         $updated_at = $domain->updated_at;
         $created_at = $domain->created_at;
 
-		return $domain->name;
-
-        //return view('user.index', ['users' => $users]);
+        return $domain->name;
     }
 }

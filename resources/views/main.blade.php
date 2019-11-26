@@ -11,6 +11,11 @@
 
 @section('content')
     <p>This is my body content.</p>
+
+@if (isset($error))
+  The url is invalid!
+@endif
+
     <form action="/domains" method="post">
       <div class="form-row align-items-center">
         <div class="col-sm-3 my-1">
