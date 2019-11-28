@@ -8,14 +8,15 @@ php:
     - 7.3
 
 services:
-  - mysql
+  - postgresql
 
 before_script: 
   - cp .env.travis .env
-  - mysql -e 'create database homestead_test;'
+  - psql -c 'create database homestead_test;'
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - php artisan migrate --step
 
 install:
   - make install
