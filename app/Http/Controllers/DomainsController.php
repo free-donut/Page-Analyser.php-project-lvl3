@@ -16,7 +16,7 @@ class DomainsController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function show(Request $request)
+    public function index(Request $request)
     {
         if ($request->has('error')) {
             return view('main')->with('error', 'true');
@@ -37,13 +37,32 @@ class DomainsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('main', ['error' => 'true']);
+            return redirect()->route('domains.index', ['error' => 'true']);
         }
 
         $url = $request->input('url');
         $id = DB::table('Domains')->insertGetId(
             ['name' => $url]
         );
-        return redirect("domains/$id");
+        return redirect()->route('domains.show', ['id' => $id]);
+    }
+
+    /**
+     * Show a list of url.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $domains = DB::table('Domains')->get();
+        $domain = DB::table('Domains')->where('id', $id)->first();
+        $count = DB::table('Domains')->count();
+
+        $name = $domain->name;
+        $updated_at = $domain->updated_at;
+        $created_at = $domain->created_at;
+
+        return $domain->name;
     }
 }

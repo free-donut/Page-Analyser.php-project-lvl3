@@ -14,7 +14,7 @@ class DomainsTableController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function index($id)
+    public function show($id)
     {
         $domains = DB::table('Domains')->get();
         $domain = DB::table('Domains')->where('id', $id)->first();
