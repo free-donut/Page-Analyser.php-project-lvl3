@@ -81,7 +81,7 @@ return [
             'prefix_indexes' => true,
         ],
         'testing' => [
-            'driver'    => 'mysql',
+            'driver'    => 'pgsql',
             'host'      => env('DB_TEST_HOST', 'localhost'),
             'database'  => env('DB_TEST_DATABASE', 'homestead_test'),
             'username'  => env('DB_TEST_USERNAME', 'homestead'),
