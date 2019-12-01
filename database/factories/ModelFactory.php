@@ -17,3 +17,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
     ];
 });
+
+$factory->define(App\Url::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->url,
+    ];
+});

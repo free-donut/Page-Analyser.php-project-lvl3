@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class DatabaseTest extends TestCase
 {
-    use DatabaseMigrations;
+    //use DatabaseMigrations;
+    use DatabaseTransactions;
 
     /**
      * A basic functional test example.
@@ -21,5 +22,19 @@ class DatabaseTest extends TestCase
         // Make call to application...
 
         $this->seeInDatabase('Domains', ['name' => 'http://yula1.freedonut123test.space/']);
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testDomains()
+    {
+        //$url = factory('App\Url')->make();
+        //$response = $this->call('POST', '/domains', ['url' => 'http://yula1.freedonut123test.space/']);
+        $response = $this->call('GET', '/domains');
+
+        $this->assertEquals(200, $response->status());
     }
 }

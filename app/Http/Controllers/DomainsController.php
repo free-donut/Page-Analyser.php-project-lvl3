@@ -16,7 +16,7 @@ class DomainsController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function index(Request $request)
+    public function main(Request $request)
     {
         if ($request->has('error')) {
             return view('main')->with('error', 'true');
@@ -37,7 +37,7 @@ class DomainsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('domains.index', ['error' => 'true']);
+            return redirect()->route('domains.main', ['error' => 'true']);
         }
 
         $url = $request->input('url');
@@ -48,7 +48,7 @@ class DomainsController extends Controller
     }
 
     /**
-     * Show a list of url.
+     * Show a url.
      *
      * @param  int  $id
      * @return Response
@@ -62,7 +62,18 @@ class DomainsController extends Controller
         $name = $domain->name;
         $updated_at = $domain->updated_at;
         $created_at = $domain->created_at;
+        return view('url_page', ['url' => $name]);
+    }
 
-        return $domain->name;
+    /**
+     * Show a list of url.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function index()
+    {
+        $domains = DB::table("Domains")->paginate(3);
+        return view('index', ['domains' => $domains]);
     }
 }
