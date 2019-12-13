@@ -10,9 +10,9 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
+
 class DatabaseTest extends TestCase
 {
-    //use DatabaseMigrations;
     use DatabaseTransactions;
 
     /**
@@ -23,31 +23,19 @@ class DatabaseTest extends TestCase
 
     public function testDatabase()
     {
-        $response = $this->call('POST', '/domains', ['url' => 'https://ru.hexlet.io/']);
-        // Make call to application...
+        $mock = new MockHandler([
+            new Response(202, ['X-Foo' => 'Bar'], 'Hello, World'),
+        ]);
+        $handlerStack = HandlerStack::create($mock);
 
-        $this->seeInDatabase('Domains', ['name' => 'https://ru.hexlet.io/']);
+        $this->app->instance(Client::class, new Client(['handler' => $handlerStack]));
+
+        $this->post('/domains', ['url' => 'https://ru.hexlet.io/'])
+             ->seeInDatabase('Domains', [
+                 'name' => 'https://ru.hexlet.io/', 
+                 'status_code' => 202,
+            ]);
     }
-
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-
-    /*public function testDatabase2()
-    {
-
-        $this->mock(Client::class, function ($mock) {
-            $mock->shouldReceive(['getBody', 'getSize', 'getStatusCode'])->once();
-        });
-
-
-        $response = $this->call('POST', '/domains', ['url' => 'https://ru.hexlet.io/']);
-        // Make call to application...
-
-        $this->seeInDatabase('Domains', ['name' => 'https://ru.hexlet.io/']);
-    }*/
 
     /**
      * A basic test example.
