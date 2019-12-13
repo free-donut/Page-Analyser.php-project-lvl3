@@ -12,6 +12,24 @@
 @section('content')
     <p>This is my body content.</p>
 
-    {{ $url }}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">URL</th>
+                <th scope="col">Created at</th>
+                <th scope="col">Status code</th>
+                <th scope="col">Contentlength</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ $domain->name }}</td>
+                <td>{{ $domain->created_at }}</td>
+                <td>{{ $domain->status_code }}</td>
+                <td>{{ $domain->content_length }}</td>
+            </tr>
+        </tbody>
+    </table>
 
 @endsection

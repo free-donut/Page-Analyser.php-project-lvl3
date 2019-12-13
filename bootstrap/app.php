@@ -79,7 +79,7 @@ $app->singleton(
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-
+$app->register(App\Providers\GuzzleServiceProvider::class);
 
 if (env('APP_DEBUG')) {
     $app->configure('app');

@@ -50,6 +50,7 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/lumen.log'),
             'level' => 'debug',
+	    'permission' => 0666,
             'days' => 14,
         ],
 

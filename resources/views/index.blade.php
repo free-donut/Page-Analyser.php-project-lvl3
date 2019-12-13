@@ -11,14 +11,26 @@
 
 @section('content')
     <p>This is my body content.</p>
-
-
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">URL</th>
+                <th scope="col">Status code</th>
+                <th scope="col">Contentlength</th>
+            </tr>
+        </thead>
+        <tbody>
         <div class="list-group">
             @foreach ($domains as $domain)
-               <a href="{{ $domain->name }}" class="list-group-item list-group-item-action">{{ $domain->name }}</a>
+            <tr>
+                <td><a href="{{ $domain->name }}" class="card-link">{{ $domain->name }}</a></td>
+                <td>{{ $domain->status_code }}</td>
+                <td>{{ $domain->content_length }}</td>
+            </tr>
             @endforeach
         </div>
-
+        </tbody>
+    </table>
     {{ $domains->links() }}
 
 @endsection

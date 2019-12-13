@@ -7,9 +7,29 @@ use Illuminate\Http\Request;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Validator;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+use Illuminate\Http\Response;
+use Psr\Http\Message\ResponseInterface;
 
 class DomainsController extends Controller
 {
+
+     /**
+     * The GuzzleHttp Client instance.
+     */
+    protected $client;
+    /**
+     * Create a new controller instance.
+     *
+     * @param  Client $client
+     * @return void
+     */
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
+
     /**
      * Show mine page.
      *
@@ -47,6 +67,39 @@ class DomainsController extends Controller
         return redirect()->route('domains.show', ['id' => $id]);
     }
 
+
+    /**
+     * Store a new url.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store2(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'url' => 'required|url|max:255',
+        ]);
+        
+
+        if ($validator->fails()) {
+            return redirect()->route('domains.main', ['error' => 'true']);
+        }
+
+        $url = $request->input('url');
+        $response = $this->client->request('GET', $url);
+        $contentLength = $response->getBody()->getSize();
+        $responseCode = $response->getStatusCode();
+        $body = $response->getBody();
+        $id = DB::table('Domains')->insertGetId(
+            ['name' => $url,
+            'status_code' => $responseCode,
+            'content_length' => $contentLength,
+            'body' => $body]
+        );
+
+        return redirect()->route('domains.show', ['id' => $id]);
+    }
+
     /**
      * Show a url.
      *
@@ -57,12 +110,11 @@ class DomainsController extends Controller
     {
         $domains = DB::table('Domains')->get();
         $domain = DB::table('Domains')->where('id', $id)->first();
-        $count = DB::table('Domains')->count();
 
         $name = $domain->name;
         $updated_at = $domain->updated_at;
         $created_at = $domain->created_at;
-        return view('url_page', ['url' => $name]);
+        return view('url_page', ['domain' => $domain]);
     }
 
     /**
