@@ -11,14 +11,16 @@ use Illuminate\Support\Facades\DB;
 class ParseJob extends Job
 {
     protected $url;
+    protected $id;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($url)
+    public function __construct($url, $id)
     {
         $this->url = $url;
+        $this->id = $id;
     }
 
     /**
@@ -34,10 +36,10 @@ class ParseJob extends Job
         $contentLength = $response->getBody()->getSize();
         $responseCode = $response->getStatusCode();
         $body = $response->getBody();
-
-        $id = DB::table('Domains')->insertGetId(
-            ['name' =>  $this->url,
-            'status_code' => $responseCode,
+        DB::table('Domains')
+        ->where('id', $this->id)
+        ->update(
+            ['status_code' => $responseCode,
             'content_length' => $contentLength,
             'body' => $body]
         );

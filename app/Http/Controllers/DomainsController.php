@@ -56,37 +56,19 @@ class DomainsController extends Controller
         $validator = Validator::make($request->all(), [
             'url' => 'required|url|max:255',
         ]);
-
-        if ($validator->fails()) {
-            return redirect()->route('domains.main', ['error' => 'true']);
-        }
-
-        $url = $request->input('url');
-        $id = DB::table('Domains')->insertGetId(
-            ['name' => $url]
-        );
-        return redirect()->route('domains.show', ['id' => $id]);
-    }
-
-
-    /**
-     * Store a new url.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store2(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'url' => 'required|url|max:255',
-        ]);
         
         if ($validator->fails()) {
             return redirect()->route('domains.main', ['error' => 'true']);
         }
         $url = $request->input('url');
-        dispatch(new ParseJob($url));
-        $id = DB::getPdo()->lastInsertId();
+        $id = DB::table('Domains')->insertGetId(
+            ['name' =>  $url,
+            'status_code' => 0,
+            'content_length' => 0,
+            'body' => '']
+        );
+
+        dispatch(new ParseJob($url, $id));
         return redirect()->route('domains.show', ['id' => $id]);
     }
 
