@@ -11,6 +11,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Illuminate\Http\Response;
 use Psr\Http\Message\ResponseInterface;
+use App\Jobs\ParseJob;
 
 class DomainsController extends Controller
 {
@@ -80,23 +81,12 @@ class DomainsController extends Controller
             'url' => 'required|url|max:255',
         ]);
         
-
         if ($validator->fails()) {
             return redirect()->route('domains.main', ['error' => 'true']);
         }
-
         $url = $request->input('url');
-        $response = $this->client->request('GET', $url);
-        $contentLength = $response->getBody()->getSize();
-        $responseCode = $response->getStatusCode();
-        $body = $response->getBody();
-        $id = DB::table('Domains')->insertGetId(
-            ['name' => $url,
-            'status_code' => $responseCode,
-            'content_length' => $contentLength,
-            'body' => $body]
-        );
-
+        dispatch(new ParseJob($url));
+        $id = DB::getPdo()->lastInsertId();
         return redirect()->route('domains.show', ['id' => $id]);
     }
 
