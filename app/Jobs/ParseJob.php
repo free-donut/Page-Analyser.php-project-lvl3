@@ -54,6 +54,6 @@ class ParseJob extends Job
             'keywords' => $keywords,
             'description' => $description,
             'updated_at' => time()]*/
-        );
+        ]);
     }
 }
