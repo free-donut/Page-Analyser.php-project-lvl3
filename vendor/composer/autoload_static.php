@@ -124,6 +124,7 @@ class ComposerStaticInit38911181b042c26c1b7262255f5cf6ee
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
+            'DiDom\\' => 6,
             'DeepCopy\\' => 9,
             'DebugBar\\' => 9,
         ),
@@ -397,6 +398,10 @@ class ComposerStaticInit38911181b042c26c1b7262255f5cf6ee
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
         ),
+        'DiDom\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom',
+        ),
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
@@ -452,10 +457,12 @@ class ComposerStaticInit38911181b042c26c1b7262255f5cf6ee
         'App\\Http\\Middleware\\ExampleMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/ExampleMiddleware.php',
         'App\\Jobs\\ExampleJob' => __DIR__ . '/../..' . '/app/Jobs/ExampleJob.php',
         'App\\Jobs\\Job' => __DIR__ . '/../..' . '/app/Jobs/Job.php',
+        'App\\Jobs\\ParseJob' => __DIR__ . '/../..' . '/app/Jobs/ParseJob.php',
         'App\\Listeners\\ExampleListener' => __DIR__ . '/../..' . '/app/Listeners/ExampleListener.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
+        'App\\Providers\\GuzzleServiceProvider' => __DIR__ . '/../..' . '/app/Providers/GuzzleServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
@@ -612,6 +619,14 @@ class ComposerStaticInit38911181b042c26c1b7262255f5cf6ee
         'DeepCopy\\TypeFilter\\Spl\\SplDoublyLinkedListFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Spl/SplDoublyLinkedListFilter.php',
         'DeepCopy\\TypeFilter\\TypeFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/TypeFilter.php',
         'DeepCopy\\TypeMatcher\\TypeMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeMatcher/TypeMatcher.php',
+        'DiDom\\ClassAttribute' => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom/ClassAttribute.php',
+        'DiDom\\Document' => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom/Document.php',
+        'DiDom\\Element' => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom/Element.php',
+        'DiDom\\Encoder' => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom/Encoder.php',
+        'DiDom\\Errors' => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom/Errors.php',
+        'DiDom\\Exceptions\\InvalidSelectorException' => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom/Exceptions/InvalidSelectorException.php',
+        'DiDom\\Query' => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom/Query.php',
+        'DiDom\\StyleAttribute' => __DIR__ . '/..' . '/imangazaliev/didom/src/DiDom/StyleAttribute.php',
         'Doctrine\\Common\\Inflector\\Inflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
         'Doctrine\\Common\\Lexer\\AbstractLexer' => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer/AbstractLexer.php',
         'Doctrine\\Instantiator\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator/Exception/ExceptionInterface.php',
