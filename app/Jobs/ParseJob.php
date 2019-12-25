@@ -35,7 +35,7 @@ class ParseJob extends Job
 
     {
         $client = app(Client::class);
-        try {
+        //try {
                 $response = $client->request('GET',  $this->url, ['http_errors' => false]);
                 $statusCode = $response->getStatusCode();
                 $contentLength = $response->getBody()->getSize();
@@ -58,8 +58,8 @@ class ParseJob extends Job
                     'description' => $description,
                     'updated_at' => time()]
                 );
-            } catch (ConnectException $e) {
+            //} catch (ConnectException $e) {
                 //fail
-            }    
+            //}    
     }
 }

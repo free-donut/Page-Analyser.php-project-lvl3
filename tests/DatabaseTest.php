@@ -37,7 +37,7 @@ class DatabaseTest extends TestCase
                  'url_adress' => $url, 
                  'status_code' => 200,
                  'content_length' => $content_length,
-                 'body' => $content,
+                 'body' => $content
             ]);
     }
 
