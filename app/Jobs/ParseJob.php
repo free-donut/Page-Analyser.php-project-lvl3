@@ -38,11 +38,11 @@ class ParseJob extends Job
         $body = (string) $response->getBody();
         $contentLength = $response->getBody()->getSize();
 
-        $document = app(Document::class);
+        /*$document = app(Document::class);
         $document->loadHtml($body);
         $h1 = ($document->has('h1')) ? $document->find('h1')[0]->text() : null;
         $keywords = ($document->has('meta[name=keywords][content]')) ?  $document->find('meta[name=keywords][content]')[0]->attr('content') : null;
-        $description = ($document->has('meta[name=description][content]')) ?  $document->find('meta[name=description][content]')[0]->attr('content') : null;
+        $description = ($document->has('meta[name=description][content]')) ?  $document->find('meta[name=description][content]')[0]->attr('content') : null;*/
 
         DB::table('Domains')
         ->where('id', $this->id)
@@ -50,10 +50,10 @@ class ParseJob extends Job
             ['status_code' => $statusCode,
             'content_length' => $contentLength,
             'body' => $body,
-            'h1' => $h1,
+            /*'h1' => $h1,
             'keywords' => $keywords,
             'description' => $description,
-            'updated_at' => time()]
+            'updated_at' => time()]*/
         );
     }
 }
