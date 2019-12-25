@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f08bdcdc9467fc9c8f71a784cd4a8ddf",
+    "content-hash": "a6fc30884528ccb682923ab66ff77749",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1567,6 +1567,55 @@
             "description": "The Illuminate View package.",
             "homepage": "https://laravel.com",
             "time": "2019-09-10T15:16:05+00:00"
+        },
+        {
+            "name": "imangazaliev/didom",
+            "version": "1.14.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Imangazaliev/DiDOM.git",
+                "reference": "a8389cc26897f6bb8843363b4ea16e7ef16fb3c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Imangazaliev/DiDOM/zipball/a8389cc26897f6bb8843363b4ea16e7ef16fb3c3",
+                "reference": "a8389cc26897f6bb8843363b4ea16e7ef16fb3c3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-iconv": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.9",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DiDom\\": "src/DiDom/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Imangazaliev Muhammad",
+                    "email": "imangazalievm@gmail.com"
+                }
+            ],
+            "description": "Simple and fast HTML parser",
+            "homepage": "https://github.com/Imangazaliev/DiDOM",
+            "keywords": [
+                "didom",
+                "html",
+                "parser",
+                "xml"
+            ],
+            "time": "2019-01-17T11:01:36+00:00"
         },
         {
             "name": "laravel/lumen-framework",

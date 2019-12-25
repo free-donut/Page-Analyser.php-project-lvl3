@@ -23,7 +23,7 @@
         <div class="list-group">
             @foreach ($domains as $domain)
             <tr>
-                <td><a href="{{ $domain->name }}" class="card-link">{{ $domain->name }}</a></td>
+                <td><a href="{{ $domain->url_adress }}" class="card-link">{{ $domain->url_adress }}</a></td>
                 <td>{{ $domain->status_code }}</td>
                 <td>{{ $domain->content_length }}</td>
             </tr>

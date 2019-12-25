@@ -23,17 +23,21 @@ class DatabaseTest extends TestCase
 
     public function testDatabase()
     {
+        $content = file_get_contents(__DIR__ . "/fixtures/test.html");
+        $content_length = strlen($content);
+        $url = 'https://ru.hexlet.io/';
         $mock = new MockHandler([
-            new Response(202, ['X-Foo' => 'Bar'], 'Hello, World'),
+            new Response(200, ['Content-Length' => $content_length], $content)
         ]);
         $handlerStack = HandlerStack::create($mock);
-
         $this->app->instance(Client::class, new Client(['handler' => $handlerStack]));
 
-        $this->post('/domains', ['url' => 'https://ru.hexlet.io/'])
+        $this->post('/domains', ['url' => $url])
              ->seeInDatabase('Domains', [
-                 'name' => 'https://ru.hexlet.io/', 
-                 'status_code' => 202,
+                 'url_adress' => $url, 
+                 'status_code' => 200,
+                 'content_length' => $content_length,
+                 'body' => $content,
             ]);
     }
 
@@ -44,8 +48,6 @@ class DatabaseTest extends TestCase
      */
     public function testDomains()
     {
-        //$url = factory('App\Url')->make();
-        //$response = $this->call('POST', '/domains', ['url' => 'http://yula1.freedonut123test.space/']);
         $response = $this->call('GET', '/domains');
 
         $this->assertEquals(200, $response->status());

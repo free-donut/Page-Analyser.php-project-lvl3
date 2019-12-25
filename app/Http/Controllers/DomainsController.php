@@ -11,7 +11,10 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Illuminate\Http\Response;
 use Psr\Http\Message\ResponseInterface;
+use Illuminate\Container\Container;
+use DiDom\Document;
 use App\Jobs\ParseJob;
+use Illuminate\Validation\ValidationException;
 
 class DomainsController extends Controller
 {
@@ -39,8 +42,9 @@ class DomainsController extends Controller
      */
     public function main(Request $request)
     {
-        if ($request->has('error')) {
-            return view('main')->with('error', 'true');
+        if ($request->has('errors')) {
+            $errors = $request->input('errors');
+            return view('main', ['errors' => $errors]);
         }
         return view('main');
     }
@@ -58,18 +62,21 @@ class DomainsController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return redirect()->route('domains.main', ['error' => 'true']);
+            $errors = $validator->errors()->all();
+            //return view('main', ['errors' => $errors]);
+            return redirect()->route('domains.main', ['errors' => $errors]);
         }
+
         $url = $request->input('url');
-        $id = DB::table('Domains')->insertGetId(
-            ['name' =>  $url,
-            'status_code' => 0,
-            'content_length' => 0,
-            'body' => '']
+        $domainId = DB::table('Domains')->insertGetId(
+            ['url_adress' =>  $url,
+            'created_at' => time()
+            ]
         );
 
-        dispatch(new ParseJob($url, $id));
-        return redirect()->route('domains.show', ['id' => $id]);
+        dispatch(new ParseJob($url, $domainId));
+
+        return redirect()->route('domains.show', ['id' => $domainId]);
     }
 
     /**
@@ -80,19 +87,13 @@ class DomainsController extends Controller
      */
     public function show($id)
     {
-        $domains = DB::table('Domains')->get();
         $domain = DB::table('Domains')->where('id', $id)->first();
-
-        $name = $domain->name;
-        $updated_at = $domain->updated_at;
-        $created_at = $domain->created_at;
         return view('url_page', ['domain' => $domain]);
     }
 
     /**
      * Show a list of url.
      *
-     * @param  int  $id
      * @return Response
      */
     public function index()
