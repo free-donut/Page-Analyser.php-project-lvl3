@@ -77,7 +77,6 @@ class DomainsController extends Controller
      */
     public function show($id)
     {
-        $domains = DB::table('Domains')->get();
         $domain = DB::table('Domains')->where('id', $id)->first();
         return view('url_page', ['domain' => $domain]);
     }

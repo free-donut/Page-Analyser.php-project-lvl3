@@ -24,17 +24,20 @@ class DatabaseTest extends TestCase
 
     public function testDatabase()
     {
+        $content = file_get_contents(__DIR__ . "/fixtures/test.html");
+        $content_length = strlen($content);
+        $url = 'https://ru.hexlet.io/';
         $mock = new MockHandler([
-            new Response(202, ['X-Foo' => 'Bar'], 'Hello, World'),
+            new Response(200, ['Content-Length' => $content_length], $content)
         ]);
         $handlerStack = HandlerStack::create($mock);
-
         $this->app->instance(Client::class, new Client(['handler' => $handlerStack]));
-
-        $this->post('/domains', ['url' => 'https://ru.hexlet.io/'])
+        $this->post('/domains', ['url' => $url])
              ->seeInDatabase('Domains', [
-                 'url_adress' => 'https://ru.hexlet.io/', 
-                 'status_code' => 202
+                'url_adress' => $url,
+                'status_code' => 200,
+                'content_length' => $content_length,
+                'body' => $content
             ]);
     }
 
