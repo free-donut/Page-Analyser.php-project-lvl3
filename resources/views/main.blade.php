@@ -12,8 +12,10 @@
 @section('content')
     <p>This is my body content.</p>
 
-@if (isset($error))
-  The url is invalid!
+@if (isset($errors))
+  @foreach ($errors as $message)
+      <p>{{ $message }}</p>
+  @endforeach
 @endif
 
     <form action="/domains" method="post">

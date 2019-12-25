@@ -39,8 +39,9 @@ class DomainsController extends Controller
      */
     public function main(Request $request)
     {
-        if ($request->has('error')) {
-            return view('main')->with('error', 'true');
+        if ($request->has('errors')) {
+            $errors = $request->input('errors');
+            return view('main', ['errors' => $errors]);
         }
         return view('main');
     }
@@ -58,7 +59,8 @@ class DomainsController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return redirect()->route('domains.main', ['error' => 'true']);
+            $errors = $validator->errors()->all();
+            return redirect()->route('domains.main', ['errors' => $errors]);
         }
         $url = $request->input('url');
         $id = DB::table('Domains')->insertGetId(
