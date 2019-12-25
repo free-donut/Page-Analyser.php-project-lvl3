@@ -13,7 +13,8 @@ use GuzzleHttp\Exception\RequestException;
 
 class DatabaseTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
+    //use DatabaseTransactions;
 
     /**
      * A basic functional test example.

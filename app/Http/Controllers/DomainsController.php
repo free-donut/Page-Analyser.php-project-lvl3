@@ -63,12 +63,7 @@ class DomainsController extends Controller
             return redirect()->route('domains.main', ['errors' => $errors]);
         }
         $url = $request->input('url');
-        $id = DB::table('Domains')->insertGetId(
-            ['url_adress' =>  $url,
-            'status_code' => 0,
-            'content_length' => 0,
-            'body' => '']
-        );
+        $id = DB::table('Domains')->insertGetId(['url_adress' =>  $url]);
 
         dispatch(new ParseJob($url, $id));
         return redirect()->route('domains.show', ['id' => $id]);
