@@ -32,7 +32,7 @@ class DatabaseTest extends TestCase
 
         $this->post('/domains', ['url' => 'https://ru.hexlet.io/'])
              ->seeInDatabase('Domains', [
-                 'name' => 'https://ru.hexlet.io/', 
+                 'url_adress' => 'https://ru.hexlet.io/', 
                  'status_code' => 202,
             ]);
     }

@@ -16,11 +16,14 @@ class CreateDomainsTable extends Migration
         //Поля: id, name, updated_at, created_at.
         Schema::create('Domains', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 100);
-            $table->integer('status_code');
-            $table->integer('content_length');
-            $table->text('body');
-            $table->timestamps();
+            $table->string('url_adress', 100);
+            $table->integer('status_code')->nullable();
+            $table->integer('content_length')->nullable();
+            $table->text('body')->nullable();
+            $table->text('h1')->nullable();
+            $table->text('keywords')->nullable();
+            $table->text('description')->nullable();
+            $table->timestamps(0);
         });
     }
 

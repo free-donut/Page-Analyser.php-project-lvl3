@@ -64,7 +64,7 @@ class DomainsController extends Controller
         }
         $url = $request->input('url');
         $id = DB::table('Domains')->insertGetId(
-            ['name' =>  $url,
+            ['url_adress' =>  $url,
             'status_code' => 0,
             'content_length' => 0,
             'body' => '']
@@ -84,10 +84,6 @@ class DomainsController extends Controller
     {
         $domains = DB::table('Domains')->get();
         $domain = DB::table('Domains')->where('id', $id)->first();
-
-        $name = $domain->name;
-        $updated_at = $domain->updated_at;
-        $created_at = $domain->created_at;
         return view('url_page', ['domain' => $domain]);
     }
 
