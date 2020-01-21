@@ -23,3 +23,10 @@ $factory->define(App\Url::class, function (Faker\Generator $faker) {
         'name' => $faker->url,
     ];
 });
+
+$factory->define(App\Domain::class, function (Faker\Generator $faker) {
+    return [
+        'url_adress' => $faker->url,
+        'state' => 'created',
+    ];
+});

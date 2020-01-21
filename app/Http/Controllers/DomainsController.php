@@ -4,21 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Validator;
-use App\Http\Controllers\Controller;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
-use Illuminate\Http\Response;
 use Psr\Http\Message\ResponseInterface;
+use App\Http\Controllers\Controller;
 use App\Jobs\ParseJob;
+use App\Domain;
+use Validator;
 
 class DomainsController extends Controller
 {
 
-     /**
-     * The GuzzleHttp Client instance.
-     */
+    /**
+    * The GuzzleHttp Client instance.
+    */
     protected $client;
     /**
      * Create a new controller instance.
@@ -63,7 +64,12 @@ class DomainsController extends Controller
             return redirect()->route('domains.main', ['errors' => $errors]);
         }
         $url = $request->input('url');
-        $id = DB::table('Domains')->insertGetId(['url_adress' =>  $url]);
+
+        $domain = new Domain();
+        $domain->url_adress = $url;
+        $domain->state = 'created';
+        $domain->save();
+        $id = $domain->id;
 
         dispatch(new ParseJob($url, $id));
         return redirect()->route('domains.show', ['id' => $id]);
@@ -77,19 +83,18 @@ class DomainsController extends Controller
      */
     public function show($id)
     {
-        $domain = DB::table('Domains')->where('id', $id)->first();
+        $domain = Domain::find($id);
         return view('url_page', ['domain' => $domain]);
     }
 
     /**
      * Show a list of url.
      *
-     * @param  int  $id
      * @return Response
      */
     public function index()
     {
-        $domains = DB::table("Domains")->paginate(3);
+        $domains = Domain::paginate(5);
         return view('index', ['domains' => $domains]);
     }
 }

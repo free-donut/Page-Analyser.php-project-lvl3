@@ -14,15 +14,14 @@ use GuzzleHttp\Exception\RequestException;
 class DatabaseTest extends TestCase
 {
     use DatabaseMigrations;
-    //use DatabaseTransactions;
-
+    
     /**
      * A basic functional test example.
      *
      * @return void
      */
 
-    public function testDatabase()
+    public function testStore()
     {
         $content = file_get_contents(__DIR__ . "/fixtures/test.html");
         $content_length = strlen($content);
@@ -38,7 +37,7 @@ class DatabaseTest extends TestCase
                 'status_code' => 200,
                 'content_length' => $content_length,
                 'body' => $content
-            ]);
+             ]);
     }
 
     /**
@@ -46,12 +45,33 @@ class DatabaseTest extends TestCase
      *
      * @return void
      */
-    public function testDomains()
+    public function testShow()
     {
-        //$url = factory('App\Url')->make();
-        //$response = $this->call('POST', '/domains', ['url' => 'http://yula1.freedonut123test.space/']);
-        $response = $this->call('GET', '/domains');
+        $user = factory('App\Domain')->create();
+        $id = $user->id;
+        $response = $this->call('GET', '/domains/' . $id);
+        $this->assertEquals(200, $response->status());
+    }
 
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
+        $response = $this->call('GET', '/domains');
+        $this->assertEquals(200, $response->status());
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testMain()
+    {
+        $response = $this->call('GET', '/');
         $this->assertEquals(200, $response->status());
     }
 }

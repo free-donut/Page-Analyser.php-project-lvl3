@@ -17,6 +17,7 @@ class CreateDomainsTable extends Migration
         Schema::create('Domains', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('url_adress', 100);
+            $table->string('state', 100)->nullable();
             $table->integer('status_code')->nullable();
             $table->integer('content_length')->nullable();
             $table->text('body')->nullable();

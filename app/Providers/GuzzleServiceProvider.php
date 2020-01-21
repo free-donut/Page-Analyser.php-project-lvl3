@@ -16,7 +16,7 @@ class GuzzleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('GuzzleHttp\Client', function ($app) {
-          return new Client();
+            return new Client();
         });
     }
 }
