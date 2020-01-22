@@ -15,12 +15,6 @@ class DatabaseTest extends TestCase
 {
     use DatabaseMigrations;
     
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-
     public function testStore()
     {
         $content = file_get_contents(__DIR__ . "/fixtures/test.html");
@@ -40,11 +34,6 @@ class DatabaseTest extends TestCase
              ]);
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testShow()
     {
         $user = factory('App\Domain')->create();
@@ -53,22 +42,12 @@ class DatabaseTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testIndex()
     {
         $response = $this->call('GET', '/domains');
         $this->assertEquals(200, $response->status());
     }
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testMain()
     {
         $response = $this->call('GET', '/');

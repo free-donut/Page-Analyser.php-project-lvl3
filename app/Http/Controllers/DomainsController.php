@@ -16,28 +16,13 @@ use Validator;
 
 class DomainsController extends Controller
 {
-
-    /**
-    * The GuzzleHttp Client instance.
-    */
     protected $client;
-    /**
-     * Create a new controller instance.
-     *
-     * @param  Client $client
-     * @return void
-     */
+
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    /**
-     * Show mine page.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
     public function main(Request $request)
     {
         if ($request->has('errors')) {
@@ -47,12 +32,6 @@ class DomainsController extends Controller
         return view('main');
     }
 
-    /**
-     * Store a new url.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -75,23 +54,12 @@ class DomainsController extends Controller
         return redirect()->route('domains.show', ['id' => $id]);
     }
 
-    /**
-     * Show a url.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function show($id)
     {
         $domain = Domain::find($id);
         return view('url_page', ['domain' => $domain]);
     }
 
-    /**
-     * Show a list of url.
-     *
-     * @return Response
-     */
     public function index()
     {
         $domains = Domain::paginate(5);
