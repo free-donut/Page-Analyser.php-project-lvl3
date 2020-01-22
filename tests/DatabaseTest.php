@@ -1,9 +1,9 @@
 <?php
 
+namespace Tests;
+
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
-//use Illuminate\Http\Response;
-//use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
