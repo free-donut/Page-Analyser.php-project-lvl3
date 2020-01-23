@@ -4,19 +4,18 @@
 
 @section('title', 'Page Title')
 
-@section('master')
+@section('navbar')
     @parent
-    <p>This is appended to the master sidebar.</p>
 @endsection
 
 @section('content')
-    <p>This is my body content.</p>
+    <p>List of added pages</p>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">URL</th>
                 <th scope="col">Status code</th>
-                <th scope="col">Contentlength</th>
+                <th scope="col">Content length</th>
             </tr>
         </thead>
         <tbody>

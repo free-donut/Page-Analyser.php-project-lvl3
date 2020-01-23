@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
 use App\Http\Controllers\Controller;
 use App\Jobs\ParseJob;
 use App\Domain;
 use Validator;
 
-class DomainsController extends Controller
+class DomainController extends Controller
 {
     protected $client;
 
@@ -62,7 +59,7 @@ class DomainsController extends Controller
 
     public function index()
     {
-        $domains = Domain::paginate(5);
+        $domains = Domain::paginate(3);
         return view('index', ['domains' => $domains]);
     }
 }

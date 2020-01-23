@@ -4,15 +4,12 @@
 
 @section('title', 'Page Title')
 
-@section('master')
+@section('navbar')
     @parent
-    <p>This is appended to the master sidebar.</p>
 @endsection
 
 @section('content')
-    <p>This is my body content.</p>
-
-
+    <p>Page analysis</p>
     <table class="table">
         <thead>
             <tr>

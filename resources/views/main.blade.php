@@ -4,13 +4,12 @@
 
 @section('title', 'Page Title')
 
-@section('master')
+@section('navbar')
     @parent
-    <p>This is appended to the master sidebar.</p>
 @endsection
 
 @section('content')
-    <p>This is my body content.</p>
+    <p>This is the page SEO-analyzer</p>
 
 @if (isset($errors))
   @foreach ($errors as $message)
