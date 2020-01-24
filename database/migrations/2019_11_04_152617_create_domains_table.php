@@ -8,7 +8,7 @@ class CreateDomainsTable extends Migration
 {
     public function up()
     {
-        Schema::create('Domains', function (Blueprint $table) {
+        Schema::create('domains', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('url_adress', 100);
             $table->string('state', 100)->nullable();
@@ -24,6 +24,6 @@ class CreateDomainsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('Domains');
+        Schema::dropIfExists('domains');
     }
 }
