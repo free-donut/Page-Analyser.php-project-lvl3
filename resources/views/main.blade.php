@@ -13,11 +13,13 @@
 
 @if (isset($errors))
   @foreach ($errors as $message)
-      <p>{{ $message }}</p>
+      <div class="alert alert-warning" role="alert">
+        {{ $message }}
+      </div>
   @endforeach
 @endif
 
-    <form action="/domains" method="post">
+    <form action="{{ route('domains.store') }}" method="post">
       <div class="form-row align-items-center">
         <div class="col-sm-3 my-1">
           <label class="sr-only" for="inlineFormInputName">URL</label>

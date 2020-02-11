@@ -10,7 +10,7 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\RequestException;
 
-class PageAnalyzerTest extends TestCase
+class DomainControllerTest extends TestCase
 {
     use DatabaseMigrations;
     
@@ -24,8 +24,8 @@ class PageAnalyzerTest extends TestCase
         ]);
         $handlerStack = HandlerStack::create($mock);
         $this->app->instance(Client::class, new Client(['handler' => $handlerStack]));
-        $this->post('/domains', ['url' => $url])
-             ->seeInDatabase('Domains', [
+        $this->post(route('domains.store', ['url' => $url]))->assertResponseStatus(302);
+        $this->seeInDatabase('Domains', [
                 'url_adress' => $url,
                 'status_code' => 200,
                 'content_length' => $content_length,
@@ -35,21 +35,16 @@ class PageAnalyzerTest extends TestCase
 
     public function testShow()
     {
-        $user = factory('App\Domain')->create();
-        $id = $user->id;
-        $response = $this->call('GET', '/domains/' . $id);
-        $this->assertEquals(200, $response->status());
+        $domain = factory('App\Domain')->create();
+        $id = $domain->id;
+        $this->get(route('domains.show', ['id' => $id]));
+        $this->assertResponseStatus(200);
     }
 
     public function testIndex()
     {
-        $response = $this->call('GET', '/domains');
-        $this->assertEquals(200, $response->status());
-    }
-
-    public function testMain()
-    {
-        $response = $this->call('GET', '/');
-        $this->assertEquals(200, $response->status());
+        $domain = factory('App\Domain', 5)->create();
+        $this->get(route('domains.index'));
+        $this->assertResponseStatus(200);
     }
 }

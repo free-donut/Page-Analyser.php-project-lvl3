@@ -20,15 +20,6 @@ class DomainController extends Controller
         $this->client = $client;
     }
 
-    public function main(Request $request)
-    {
-        if ($request->has('errors')) {
-            $errors = $request->input('errors');
-            return view('main', ['errors' => $errors]);
-        }
-        return view('main');
-    }
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -37,7 +28,7 @@ class DomainController extends Controller
         
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
-            return redirect()->route('domains.main', ['errors' => $errors]);
+            return redirect()->route('main', ['errors' => $errors]);
         }
         $url = $request->input('url');
 
@@ -51,9 +42,14 @@ class DomainController extends Controller
         return redirect()->route('domains.show', ['id' => $id]);
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
+
         $domain = Domain::find($id);
+        if (!$domain) {
+            $errors[] = 'Page not found';
+            return redirect()->route('main', ['errors' => $errors]);
+        }
         return view('url_page', ['domain' => $domain]);
     }
 
