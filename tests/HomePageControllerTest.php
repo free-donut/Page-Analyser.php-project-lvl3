@@ -4,11 +4,11 @@ namespace Tests;
 
 use Laravel\Lumen\Testing\DatabaseMigrations;
 
-class MainControllerTest extends TestCase
+class HomePageControllerTest extends TestCase
 {
     public function testMain()
     {
-        $this->get(route('main'));
+        $this->get(route('home.create'));
         $this->assertResponseStatus(200);
     }
 }

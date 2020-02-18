@@ -28,7 +28,7 @@ class DomainController extends Controller
         
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
-            return redirect()->route('main', ['errors' => $errors]);
+            return redirect()->route('home.create', compact('errors'));
         }
         $url = $request->input('url');
 
@@ -39,23 +39,20 @@ class DomainController extends Controller
         $id = $domain->id;
 
         dispatch(new ParseJob($url, $id));
-        return redirect()->route('domains.show', ['id' => $id]);
+        return redirect()->route('domains.show', compact('id'));
     }
 
     public function show($id, Request $request)
     {
 
         $domain = Domain::find($id);
-        if (!$domain) {
-            $errors[] = 'Page not found';
-            return redirect()->route('main', ['errors' => $errors]);
-        }
-        return view('url_page', ['domain' => $domain]);
+        $error = (!$domain) ? 'Page not found' : null;
+        return view('domains/show', compact('domain', 'error'));
     }
 
     public function index()
     {
         $domains = Domain::paginate(3);
-        return view('index', ['domains' => $domains]);
+        return view('domains/index', compact('domains'));
     }
 }

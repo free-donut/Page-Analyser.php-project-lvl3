@@ -11,15 +11,12 @@ use App\Jobs\ParseJob;
 use App\Domain;
 use Validator;
 
-class MainController extends Controller
+class HomePageController extends Controller
 {
 
-    public function main(Request $request)
+    public function create(Request $request)
     {
-        if ($request->has('errors')) {
-            $errors = $request->input('errors');
-            return view('main', ['errors' => $errors]);
-        }
-        return view('main');
+        $errors = $request->query('errors') ?: null;
+        return view('domains/new', compact('errors'));
     }
 }
