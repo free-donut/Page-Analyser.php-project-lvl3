@@ -28,7 +28,7 @@ class DomainController extends Controller
         
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
-            return redirect()->route('home.create', compact('errors'));
+            return redirect()->route('home', compact('errors'));
         }
         $url = $request->input('url');
 
@@ -46,8 +46,10 @@ class DomainController extends Controller
     {
 
         $domain = Domain::find($id);
-        $error = (!$domain) ? 'Page not found' : null;
-        return view('domains/show', compact('domain', 'error'));
+        if (!$domain) {
+            abort(404);
+        }
+        return view('domains/show', compact('domain'));
     }
 
     public function index()

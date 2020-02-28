@@ -11,7 +11,7 @@
 |
 */
 
-$router->get('/', ['uses' => 'HomePageController@create','as' => 'home.create']);
+$router->get('/', ['uses' => 'HomePageController@create','as' => 'home']);
 $router->get('domains', ['uses' => 'DomainController@index', 'as' => 'domains.index']);
 $router->post('domains', ['uses' => 'DomainController@store', 'as' => 'domains.store']);
 $router->get('domains/{id}', ['uses' => 'DomainController@show', 'as' => 'domains.show']);

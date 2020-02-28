@@ -6,9 +6,9 @@ use Laravel\Lumen\Testing\DatabaseMigrations;
 
 class HomePageControllerTest extends TestCase
 {
-    public function testMain()
+    public function testCreate()
     {
-        $this->get(route('home.create'));
+        $this->get(route('home'));
         $this->assertResponseStatus(200);
     }
 }
